@@ -3,6 +3,7 @@
 }
 
 body {
+	margin: 0 0 0 0;
 	background: linear-gradient(plum -10%, lightblue 80%, aquamarine 120%);
 	background-attachment: fixed;
 }
@@ -23,7 +24,6 @@ button:hover {
 
 #frame {
 	margin-top: 5%;
-	margin-bottom: 10%;
 	display: inline-block;
 	background:linear-gradient(#fff, #ddd);
 	width: 300px;
