@@ -29,10 +29,16 @@ function makeToDo(Title, Desc) {
 	itemDiv.className = "to-do-item";
 	contentDiv.className = "to-do__content";
 	toDoTitle.className = "to-do__title";
-	toDoTitle.innerText = Title;
+	if (Title.length > 18)
+		toDoTitle.innerText = Title.substring(0, 18) + "...";
+	else
+		toDoTitle.innerText = Title;
 	contentDiv.appendChild(toDoTitle);
 	toDoDesc.className = "to-do__desc";
-	toDoDesc.innerText = Desc;
+	if (Desc.length > 22)
+		toDoDesc.innerText = Desc.substring(0, 22) + "...";
+	else
+		toDoDesc.innerText = Desc;
 	contentDiv.appendChild(toDoDesc);
 	button.className = "to-do__menu";
 	button.innerText = "≡";
