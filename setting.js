@@ -5,7 +5,7 @@ const MODALBG = "js-modal-background",
 const settingButton = document.querySelector("#js-setting__open-button"),
 	settingCloseButton = document.querySelector(".js-setting__close-button"),
 	modalBackground = document.querySelector(`.${MODALBG}`),
-	modalWindow = document.querySelector(`.${MODALWINDOW}`);
+	modalWindow = modalBackground.querySelector(`.${MODALWINDOW}`);
 
 function getSettingModal() {
 	if (modalBackground.classList.contains(NOTSHOWING)) {

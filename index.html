@@ -19,16 +19,26 @@
 				</span>
 				<span class="current-time js-current-time">currentTime</span>
 			</div>
-			<div id="header">
-				header
+			<div id="header" class="js-header">
+				<button class="slide-button__not-showing align-left">️&lt;</button>
+				<button class="slide-button align-right">&gt;</button>
+				<h3>greetings</h3>
+				<p>to-do percent</p>
+			</div>
+			<div id="tab">
+				<button class="add-tab-button js-add-tab-button">add</button>
+				<button class="current-tab">current</button>
+				<button class="done-tab">done</button>
 			</div>
 			<div id="content">
-				content
+				<ul>
+				</ul>
+				<div class="padding"></div>
 			</div>
 		</div>
 	</div>
 	<div class="not-showing modal-background js-modal-background">
-		<div class="now-showing modal-window js-modal-window">
+		<div class="not-showing modal-window js-modal-window">
 			<h3>Setting</h3>
 			<div>
 				<h4 class="menu__title">Change name</h4>
@@ -40,9 +50,19 @@
 			</div>
 			<button class="setting__close-button js-setting__close-button">close</button>
 		</div>
+		<div class="not-showing add-window js-add-window">
+			<h3>ADD TODO</h3>
+			<div>
+				<input class="add__title" placeholder="Enter TODO">
+				<input class="add__desc" placeholder="Enter Description (optional)">
+			</div>
+			<button class="add__add-button js-add__add-button">add</button>
+			<button class="add__close-button js-add__close-button">close</button>
+		</div>
 	</div>
 	<script src="clock.js"></script>
 	<script src="setting.js"></script>
+	<script src="to-do.js"></script>
 </body>
 
 </html>
