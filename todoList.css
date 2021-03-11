@@ -2,6 +2,40 @@
 	--transition-property: 0.3s ease-in-out;
 }
 
+.not-showing {
+	display: none;
+}
+
+.modal-background {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background: rgba(255, 255, 255, 0.5);
+	transition: var(--transition-property);
+	text-align: center;
+}
+
+.modal-window {
+	z-index: 11;
+	margin-top: 10%;
+	margin-bottom: 10%;
+	display: inline-block;
+	padding: 10px;
+	width: 250px;
+	height: 350px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+	background: white;
+}
+
+.menu__title {
+	margin: unset;
+	margin-top: 20px;
+}
+
 body {
 	margin: 0 0 0 0;
 	background: linear-gradient(plum -10%, lightblue 80%, aquamarine 120%);
@@ -16,9 +50,20 @@ button {
 
 button:hover {
 	opacity: 100%;
+	cursor: pointer;
 }
 
-#frameAlign {
+.setting__close-button {
+	margin-top: 20px;
+	opacity: 100%;
+	width: 80px;
+	height: 40px;
+	border-radius: 10px;
+	background-color: teal;
+	color: white;
+}
+
+#frame-align {
 	text-align: center;
 }
 
@@ -29,15 +74,17 @@ button:hover {
 	background:linear-gradient(#fff, #ddd);
 	width: 300px;
 	height: 450px;
-	border-radius: 6% / 4%;
+	border-radius: 20px;
 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 	overflow: hidden;
+	z-index: 1;
 }
 
 #bar {
 	margin: 0;
+	width: inherit;
 	height: 30px;
-	background-color: #111;
+	background: #111;
 	position:relative;
 	top:0px;
 }
@@ -55,7 +102,7 @@ button:hover {
 	color: white;
 }
 
-#currentTime {
+.current-time {
 	margin-top: 8px;
 	margin-right: 5%;
 	float: right;
@@ -65,10 +112,12 @@ button:hover {
 
 #content {
 	margin: 0;
-	height: auto;
+	width: inherit;
+	height: 320px;
 }
 
 #header {
-	background-color: teal;
+	background: teal;
+	width: inherit;
 	height: 100px;
 }

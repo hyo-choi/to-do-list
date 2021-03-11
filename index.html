@@ -9,15 +9,15 @@
 </head>
 
 <body>
-	<div id="frameAlign">
+	<div id="frame-align">
 		<div id="frame">
 			<div id="bar">
 				<span id="icons">
 					<ul>
-						<li><button id="setting">⚙️</button></li>
+						<li><button id="js-setting__open-button">⚙️</button></li>
 					</ul>
 				</span>
-				<span id="currentTime">currentTime</span>
+				<span class="current-time js-current-time">currentTime</span>
 			</div>
 			<div id="header">
 				header
@@ -27,7 +27,22 @@
 			</div>
 		</div>
 	</div>
+	<div class="not-showing modal-background js-modal-background">
+		<div class="now-showing modal-window js-modal-window">
+			<h3>Setting</h3>
+			<div>
+				<h4 class="menu__title">Change name</h4>
+				<span>change name</span>
+			</div>
+			<div>
+				<h4 class="menu__title">APP RESET</h4>
+				<span>app reset</span>
+			</div>
+			<button class="setting__close-button js-setting__close-button">close</button>
+		</div>
+	</div>
 	<script src="clock.js"></script>
+	<script src="setting.js"></script>
 </body>
 
 </html>

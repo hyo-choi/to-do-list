@@ -1,4 +1,4 @@
-const clock = document.querySelector("#currentTime");
+const clock = document.querySelector(".js-current-time");
 
 function getTime() {
 	const date = new Date();
@@ -17,4 +17,4 @@ function init() {
 }
 
 init();
-setInterval(getTime, 500);
+setInterval(getTime, 1000);
