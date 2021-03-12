@@ -18,7 +18,7 @@
 	text-align: center;
 }
 
-.modal-window,
+.setting-window,
 .add-window {
 	z-index: 11;
 	margin-top: 10%;
@@ -176,8 +176,8 @@ ul, li {
 	color: white;
 }
 
-.current-tab,
-.done-tab,
+.current-tab-button,
+.done-tab-button,
 .add-tab-button{
 	float:left;
 	vertical-align: middle;
@@ -209,11 +209,11 @@ ul, li {
 	height: 100px;
 }
 
-.current-tab {
+.current-tab-button {
 	background-color:mediumturquoise;
 }
 
-.done-tab {
+.done-tab-button {
 	background-color:mediumslateblue;
 }
 

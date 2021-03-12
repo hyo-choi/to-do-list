@@ -1,26 +1,26 @@
 const MODALBG = "js-modal-background",
-	MODALWINDOW = "js-modal-window",
+	SETTINGWINDOW = "js-setting-window",
 	NOTSHOWING = "not-showing";
 
-const settingButton = document.querySelector("#js-setting__open-button"),
+const settingOpenButton = document.querySelector("#js-setting__open-button"),
 	settingCloseButton = document.querySelector(".js-setting__close-button"),
 	modalBackground = document.querySelector(`.${MODALBG}`),
-	modalWindow = modalBackground.querySelector(`.${MODALWINDOW}`);
+	settingWindow = modalBackground.querySelector(`.${SETTINGWINDOW}`);
 
-function getSettingModal() {
+function toggleSettingWindow() {
 	if (modalBackground.classList.contains(NOTSHOWING)) {
 		modalBackground.classList.remove(NOTSHOWING);
-		modalWindow.classList.remove(NOTSHOWING);
+		settingWindow.classList.remove(NOTSHOWING);
 	}
 	else {
 		modalBackground.classList.add(NOTSHOWING);
-		modalWindow.classList.add(NOTSHOWING);
+		settingWindow.classList.add(NOTSHOWING);
 	}
 }
 
 function init() {
-	settingButton.addEventListener("click", getSettingModal);
-	settingCloseButton.addEventListener("click", getSettingModal);
+	settingOpenButton.addEventListener("click", toggleSettingWindow);
+	settingCloseButton.addEventListener("click", toggleSettingWindow);
 }
 
 init();

@@ -1,21 +1,21 @@
 const content = document.querySelector("#content"),
-	toDoTab = document.querySelector("#tab"),
-	toDoList = content.querySelector("ul");
+	menuTab = document.querySelector("#tab"),
+	toDoListFrame = content.querySelector("ul");
 
 const addWindow = modalBackground.querySelector(".js-add-window"),
-	toDoAddButton = toDoTab.querySelector(".js-add-tab-button"),
+	addOpenButton = menuTab.querySelector(".js-add-tab-button"),
 	addCloseButton = addWindow.querySelector(".js-add__close-button"),
 	addApplyButton = addWindow.querySelector(".js-add__add-button"),
 	inputToDoTitle = addWindow.querySelector(".add__title"),
 	inputToDoDesc = addWindow.querySelector(".add__desc");
 
-const TODOS_LS = "toDos";
+const TODOS_LS = "toDoStorage";
 
 let newId,
-	toDos = [];
+	toDoStorage = [];
 
 function saveToDos() {
-	localStorage.setItem(TODOS_LS, JSON.stringify(toDos));
+	localStorage.setItem(TODOS_LS, JSON.stringify(toDoStorage));
 }
 
 function makeToDo(Title, Desc) {
@@ -51,8 +51,8 @@ function makeToDo(Title, Desc) {
 	}
 	li.id = newId++;
 	li.appendChild(itemDiv);
-	toDoList.appendChild(li);
-	toDos.push(toDoObj);
+	toDoListFrame.appendChild(li);
+	toDoStorage.push(toDoObj);
 	saveToDos();
 }
 
@@ -67,11 +67,11 @@ function handleSubmit(event) {
 			makeToDo(title, "");
 		inputToDoTitle.value = "";
 		inputToDoDesc.value = "";
-		getAddModal();
+		toggleAddWindow();
 	}
 }
 
-function getAddModal() {
+function toggleAddWindow() {
 	if (modalBackground.classList.contains(NOTSHOWING)) {
 		modalBackground.classList.remove(NOTSHOWING);
 		addWindow.classList.remove(NOTSHOWING);
@@ -97,8 +97,8 @@ function loadToDos() {
 function init() {
 	newId = 0;
 	loadToDos();
-	toDoAddButton.addEventListener("click", getAddModal);
-	addCloseButton.addEventListener("click", getAddModal);
+	addOpenButton.addEventListener("click", toggleAddWindow);
+	addCloseButton.addEventListener("click", toggleAddWindow);
 	addApplyButton.addEventListener("click", handleSubmit);
 }
 
