@@ -4,6 +4,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="todoList.css">
 	<title>to-do list</title>
 </head>
@@ -12,18 +14,21 @@
 	<div id="frame-align">
 		<div id="frame">
 			<div id="bar">
-				<span id="icons">
+				<div id="icons">
 					<ul>
 						<li><button id="js-setting__open-button">⚙️</button></li>
 					</ul>
-				</span>
-				<span class="current-time js-current-time">currentTime</span>
+				</div>
+				<div class="current-time js-current-time"></div>
 			</div>
 			<div id="header" class="js-header">
-				<button class="slide-button__not-showing align-left">️&lt;</button>
+				<button class="slide-button--not-showing align-left">️&lt;</button>
 				<button class="slide-button align-right">&gt;</button>
-				<h3>greetings</h3>
-				<p>to-do percent</p>
+				<form class="greeting-form js-greeting-form">
+					<input type="text" placeholder="Enter name">
+				</form>
+				<h4 class="greeting js-greeting"></h4>
+				<div class="to-do-deadline"></div>
 			</div>
 			<div id="tab">
 				<button class="add-tab-button js-add-tab-button">add</button>
@@ -37,32 +42,48 @@
 			</div>
 		</div>
 	</div>
+	<!-- main frame END -->
+	<!-- modal feature -->
 	<div class="not-showing modal-background js-modal-background">
-		<div class="not-showing setting-window js-setting-window">
+		<!-- setting window -->
+		<div class="not-showing modal-window js-setting-window">
 			<h3>Setting</h3>
-			<div>
-				<h4 class="menu__title">Change name</h4>
-				<span>change name</span>
-			</div>
-			<div>
-				<h4 class="menu__title">APP RESET</h4>
-				<span>app reset</span>
-			</div>
-			<button class="setting__close-button js-setting__close-button">close</button>
+			<button class="inactive setting__name-reset-button js-setting__name-reset-button">NAME
+				RESET</button>
+			<p></p>
+			<button class="setting__all-reset-button js-setting__all-reset-button">APP RESET</button>
+			<p></p>
+			<button class="modal__close-button js-setting__close-button">CLOSE</button>
 		</div>
-		<div class="not-showing add-window js-add-window">
+
+		<!-- to-do add window -->
+		<div class="not-showing modal-window js-add-window">
 			<h3>ADD TODO</h3>
 			<div>
-				<input class="add__title" placeholder="Enter TODO">
-				<input class="add__desc" placeholder="Enter Description (optional)">
+				<input class="modal__input-title js-add__title" placeholder="Enter TODO">
+				<textarea class="modal__input-desc js-add__desc" placeholder="Enter Description (optional)"></textarea>
 			</div>
-			<button class="add__add-button js-add__add-button">add</button>
-			<button class="add__close-button js-add__close-button">close</button>
+			<button class="modal__apply-button js-add__add-button">ADD</button>
+			<button class="modal__close-button js-add__close-button">CLOSE</button>
+		</div>
+
+		<!-- to-do modifying window -->
+		<div class="not-showing modal-window js-modify-window">
+			<h3>MODIFY TODO</h3>
+			<div>
+				<input class="modal__input-title js-modify__title" placeholder="Enter TODO">
+				<textarea class="modal__input-desc js-modify__desc"
+					placeholder="Enter Description (optional)"></textarea>
+			</div>
+			<button class="modal__apply-button js-modify__modify-button">APPLY</button>
+			<button class="modal__close-button js-modify__close-button">CLOSE</button>
 		</div>
 	</div>
 	<script src="clock.js"></script>
 	<script src="setting.js"></script>
+	<script src="to-do-menu.js"></script>
 	<script src="to-do.js"></script>
+	<script src="header.js"></script>
 </body>
 
 </html>

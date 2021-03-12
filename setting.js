@@ -1,26 +1,56 @@
-const MODALBG = "js-modal-background",
-	SETTINGWINDOW = "js-setting-window",
-	NOTSHOWING = "not-showing";
-
 const settingOpenButton = document.querySelector("#js-setting__open-button"),
-	settingCloseButton = document.querySelector(".js-setting__close-button"),
-	modalBackground = document.querySelector(`.${MODALBG}`),
-	settingWindow = modalBackground.querySelector(`.${SETTINGWINDOW}`);
+	modalBackground = document.querySelector(".js-modal-background"),
+	settingWindow = modalBackground.querySelector(".js-setting-window"),
+	settingCloseButton = settingWindow.querySelector(".js-setting__close-button"),
+	resetNameButton = settingWindow.querySelector(".js-setting__name-reset-button"),
+	resetAllButton = settingWindow.querySelector(".js-setting__all-reset-button");
+
+const NOTSHOWING = "not-showing";
+
+function modalWindowOpen(window) {
+	modalBackground.classList.remove(NOTSHOWING);
+	window.classList.remove(NOTSHOWING);
+}
+
+function modalWindowExit(window) {
+	modalBackground.classList.add(NOTSHOWING);
+	window.classList.add(NOTSHOWING);
+}
+
+function resetAll() {
+	const toDoLi = toDoListFrame.querySelectorAll("li");
+	toDoLi.forEach(function (toDo) {
+		toDo.remove();
+	});
+	toDoStorage = [];
+	saveToDos();
+	localStorage.removeItem(NAME_LS);
+	loadName();
+	modalWindowExit(settingWindow);
+}
+
+function resetSavedName() {
+	if (resetNameButton.classList.contains(INACTIVE))
+		return;
+	localStorage.removeItem(NAME_LS);
+	loadName();
+	toggleSettingWindow();
+}
 
 function toggleSettingWindow() {
 	if (modalBackground.classList.contains(NOTSHOWING)) {
-		modalBackground.classList.remove(NOTSHOWING);
-		settingWindow.classList.remove(NOTSHOWING);
+		modalWindowOpen(settingWindow);
+		resetNameButton.addEventListener("click", resetSavedName);
+		resetAllButton.addEventListener("click", resetAll);
+		settingCloseButton.addEventListener("click", toggleSettingWindow);
 	}
 	else {
-		modalBackground.classList.add(NOTSHOWING);
-		settingWindow.classList.add(NOTSHOWING);
+		modalWindowExit(settingWindow);
 	}
 }
 
 function init() {
 	settingOpenButton.addEventListener("click", toggleSettingWindow);
-	settingCloseButton.addEventListener("click", toggleSettingWindow);
 }
 
 init();
