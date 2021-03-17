@@ -39,6 +39,20 @@ function modifyButtonClicked(button) {
 	modInModButton.addEventListener("click", modifyToDo);
 }
 
+function deleteButtonClicked(button) {
+	const toDoMenu = button.parentNode,
+		toDoItem = toDoMenu.parentNode,
+		toDoLi = toDoItem.parentNode,
+		id = parseInt(toDoLi.id);
+
+	toDoListFrame.removeChild(toDoLi);
+	const newToDos = toDoStorage.filter(function (toDo) {
+		return toDo.id !== id;
+	});
+	toDoStorage = newToDos;
+	saveToDos();
+}
+
 function innerMenuButtonClicked(event) {
 	const clickedButton = event.target,
 		clickedClass = clickedButton.className;
@@ -48,9 +62,9 @@ function innerMenuButtonClicked(event) {
 	/*
 	else if (clickedClass === DONE_BUTTON)
 		doneButtonClicked(clickedButton);
+	*/
 	else if (clickedClass === DELETE_BUTTON)
 		deleteButtonClicked(clickedButton)
-	*/
 }
 
 function toDoMenuClicked(event) {
