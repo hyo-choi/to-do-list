@@ -31,6 +31,10 @@
 	background: white;
 }
 
+.no-margin {
+	margin: 0;
+}
+
 .menu__title {
 	margin: unset;
 	margin-top: 20px;
@@ -65,7 +69,7 @@ ul, li {
 	cursor: initial !important;
 }
 
-.setting__name-reset-button,
+.setting__reset-button,
 .setting__all-reset-button {
 	margin-top: 10px;
 	opacity: 100%;
@@ -86,7 +90,7 @@ ul, li {
 	color: white;
 }
 
-.setting__name-reset-button,
+.setting__reset-button,
 .modal__close-button {
 	background-color: teal;
 }
@@ -94,6 +98,19 @@ ul, li {
 .modal__apply-button,
 .setting__all-reset-button {
 	background-color: lightcoral;
+}
+
+.modal__input-date {
+	border: none;
+}
+
+.modal__input-importance {
+	vertical-align: middle;
+	border: none;
+}
+
+.modal__display-importance {
+	font-size: small;
 }
 
 #frame-align {

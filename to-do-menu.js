@@ -2,10 +2,21 @@
 	Each to-do item's submenu.
 */
 
+const modifyWindow = modalBackground.querySelector(".js-modify-window"),
+	modCloseButton = modifyWindow.querySelector(".js-modify__close-button"),
+	modInModButton = modifyWindow.querySelector(".js-modify__modify-button"),
+	modifyToDoTitle = modifyWindow.querySelector(".js-modify__title"),
+	modifyToDoDesc = modifyWindow.querySelector(".js-modify__desc"),
+	modifyToDoDate = modifyWindow.querySelector(".js-modify__date"),
+	modifyToDoImportance = modifyWindow.querySelector(".js-modify__importance"),
+	modifyDisplayImportance = modifyWindow.querySelector(".js-modify__display-importance");
+
 function modifyWindowExit() {
 	const toDoContent = globalToDoContent;
 	modifyToDoTitle.value = "";
 	modifyToDoDesc.value = "";
+	modifyToDoDate.value = "";
+	modifyToDoImportance.value = 3;
 	globalTargetToDo = null;
 	globalToDoContent = null;
 	modalWindowExit(modifyWindow);
@@ -15,9 +26,14 @@ function modifyWindowExit() {
 function modifyToDo() {
 	const toDoContent = globalToDoContent,
 		targetToDo = globalTargetToDo;
+
+	if (!modifyToDoTitle.value)
+		return;
 	fillToDoText(toDoContent, modifyToDoTitle.value, modifyToDoDesc.value);
 	targetToDo.title = modifyToDoTitle.value;
 	targetToDo.desc = modifyToDoDesc.value;
+	targetToDo.date = modifyToDoDate.value;
+	targetToDo.importance = modifyToDoImportance.value;
 	saveToDos();
 	modifyWindowExit();
 }
@@ -33,8 +49,12 @@ function modifyButtonClicked(button) {
 	modalWindowOpen(modifyWindow);
 	modifyToDoTitle.value = targetToDo.title;
 	modifyToDoDesc.value = targetToDo.desc;
+	modifyToDoDate.value = targetToDo.date;
+	modifyToDoImportance.value = targetToDo.importance;
+	modifyDisplayImportance.innerText = targetToDo.importance;
 	globalToDoContent = toDoContent;
 	globalTargetToDo = targetToDo;
+	modifyToDoImportance.addEventListener("input", displayImportance);
 	modCloseButton.addEventListener("click", modifyWindowExit);
 	modInModButton.addEventListener("click", modifyToDo);
 }

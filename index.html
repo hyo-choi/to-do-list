@@ -53,10 +53,10 @@
 		<!-- setting window -->
 		<div class="not-showing modal-window js-setting-window">
 			<h3>Setting</h3>
-			<button class="inactive setting__name-reset-button js-setting__name-reset-button">NAME
+			<button class="inactive setting__reset-button js-setting__name-reset-button">NAME
 				RESET</button>
 			<p></p>
-			<button class="setting__name-reset-button js-setting__todo-reset-button">TO-DO
+			<button class="setting__reset-button js-setting__todo-reset-button">TO-DO
 				RESET</button>
 			<p></p>
 			<button class="setting__all-reset-button js-setting__all-reset-button">APP RESET</button>
@@ -70,6 +70,11 @@
 			<div>
 				<input class="modal__input-title js-add__title" placeholder="Enter TODO">
 				<textarea class="modal__input-desc js-add__desc" placeholder="Enter Description (optional)"></textarea>
+				<input type="date" class="modal__input-date js-add__date" placeholder="Enter deadline YYYY/MM/DD">
+				<p class="no-margin">⭑
+					<input type="range" class="modal__input-importance js-add__importance" min=1 max=5 value=3>
+					<span class="modal__display-importance js-add__display-importance"></span>
+				</p>
 			</div>
 			<button class="modal__apply-button js-add__add-button">ADD</button>
 			<button class="modal__close-button js-add__close-button">CLOSE</button>
@@ -82,6 +87,11 @@
 				<input class="modal__input-title js-modify__title" placeholder="Enter TODO">
 				<textarea class="modal__input-desc js-modify__desc"
 					placeholder="Enter Description (optional)"></textarea>
+				<input type="date" class="modal__input-date js-modify__date" placeholder="Enter deadline YYYY/MM/DD">
+				<p class="no-margin">⭑
+					<input type="range" class="modal__input-importance js-modify__importance" min=1 max=5 value=3>
+					<span class="modal__display-importance js-modify__display-importance"></span>
+				</p>
 			</div>
 			<button class="modal__apply-button js-modify__modify-button">APPLY</button>
 			<button class="modal__close-button js-modify__close-button">CLOSE</button>
