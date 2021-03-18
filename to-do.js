@@ -1,35 +1,23 @@
-const content = document.querySelector("#content"),
-	menuTab = document.querySelector("#tab"),
-	toDoListFrame = content.querySelector("ul");
-
-const addWindow = modalBackground.querySelector(".js-add-window"),
-	addOpenButton = menuTab.querySelector(".js-add-tab-button"),
-	addCloseButton = addWindow.querySelector(".js-add__close-button"),
-	addInAddButton = addWindow.querySelector(".js-add__add-button"),
-	inputToDoTitle = addWindow.querySelector(".js-add__title"),
-	inputToDoDesc = addWindow.querySelector(".js-add__desc");
-
-const modifyWindow = modalBackground.querySelector(".js-modify-window"),
-	modCloseButton = modifyWindow.querySelector(".js-modify__close-button"),
-	modInModButton = modifyWindow.querySelector(".js-modify__modify-button"),
-	modifyToDoTitle = modifyWindow.querySelector(".js-modify__title"),
-	modifyToDoDesc = modifyWindow.querySelector(".js-modify__desc");
-
-const TODOS_LS = "toDoStorage",
-	MENU_CLICKED = "to-do__menu--clicked",
-	ITEM_CLICKED = "to-do-item--clicked",
-	MODIFY_BUTTON = "to-do__modify",
-	DONE_BUTTON = "to-do__done",
-	DELETE_BUTTON = "to-do__delete";
-
-let newId,
-	toDoStorage = [];
-
-let globalToDoContent = null,
-	globalTargetToDo = null;
+/*
+	When to-do add button clicked
+*/
 
 function saveToDos() {
 	localStorage.setItem(TODOS_LS, JSON.stringify(toDoStorage));
+}
+
+function displayImportance(event) {
+	const range = event.target,
+		display = range.parentNode.querySelector("span");
+
+	display.innerText = range.value;
+}
+
+function deleteEnteredInputs() {
+	inputToDoTitle.value = "";
+	inputToDoDesc.value = "";
+	inputToDoDate.value = "";
+	inputToDoImportance.value = 3;
 }
 
 function fillToDoText(toDoContent, titleValue, descValue) {
@@ -47,7 +35,6 @@ function fillToDoText(toDoContent, titleValue, descValue) {
 	else
 		toDoDesc.innerText = splitDesc;
 }
-
 
 function toggleToDoMenu(menuButton) {
 	const toDoItem = menuButton.parentNode,
@@ -68,7 +55,7 @@ function toggleToDoMenu(menuButton) {
 	}
 }
 
-function makeToDo(Title, Desc) {
+function makeToDo(Title, Desc, Date, Importance) {
 	const li = document.createElement("li"),
 		toDoItem = document.createElement("div"),
 		toDoContent = document.createElement("div"),
@@ -95,10 +82,13 @@ function makeToDo(Title, Desc) {
 	menuButton.addEventListener("click", toDoMenuClicked);
 
 	modifyButton.className = MODIFY_BUTTON;
+	modifyButton.classList.add("to-do__modify");
 	modifyButton.innerText = "+";
 	doneButton.className = DONE_BUTTON;
+	doneButton.classList.add("to-do__done");
 	doneButton.innerText = "✓";
 	deleteButton.className = DELETE_BUTTON;
+	deleteButton.classList.add("to-do__delete");
 	deleteButton.innerText = "×";
 	toDoMenu.appendChild(modifyButton);
 	toDoMenu.appendChild(doneButton);
@@ -114,7 +104,9 @@ function makeToDo(Title, Desc) {
 	const toDoObj = {
 		title: Title,
 		id: newId,
-		desc: Desc
+		desc: Desc,
+		date: Date,
+		importance: Importance
 	}
 	li.id = newId++;
 	li.appendChild(toDoItem);
@@ -126,28 +118,28 @@ function makeToDo(Title, Desc) {
 function handleToDoSubmit(event) {
 	event.preventDefault();
 	const title = inputToDoTitle.value,
-		desc = inputToDoDesc.value;
+		desc = inputToDoDesc.value,
+		date = inputToDoDate.value,
+		importance = inputToDoImportance.value;
 	if (title) {
-		if (desc)
-			makeToDo(title, desc);
-		else
-			makeToDo(title, "");
-		inputToDoTitle.value = "";
-		inputToDoDesc.value = "";
+		makeToDo(title, desc, date, importance);
+		showCurrentTab();
 		toggleAddWindow();
+		deleteEnteredInputs();
 	}
 }
 
 function toggleAddWindow() {
 	if (modalBackground.classList.contains(NOTSHOWING)) {
 		modalWindowOpen(addWindow);
+		inputDisplayImportance.innerText = "3";
+		inputToDoImportance.addEventListener("input", displayImportance);
 		addCloseButton.addEventListener("click", toggleAddWindow);
 		addInAddButton.addEventListener("click", handleToDoSubmit);
 	}
 	else {
 		modalWindowExit(addWindow);
-		inputToDoTitle.value = "";
-		inputToDoDesc.value = "";
+		deleteEnteredInputs();
 	}
 }
 
@@ -157,16 +149,28 @@ function loadToDos() {
 		const parsedToDos = JSON.parse(loadedToDos);
 		if (parsedToDos === null)
 			return;
+		parsedToDos.sort(function (toDo1, toDo2) {
+			if (toDo1.date > toDo2.date)
+				return 1;
+			if (toDo1.date < toDo2.date)
+				return -1;
+			if (toDo1.importance < toDo2.importance)
+				return 1;
+			if (toDo1.importance > toDo2.importance)
+				return -1;
+			return 0;
+		});
 		parsedToDos.forEach(function (toDoObj) {
-			makeToDo(toDoObj.title, toDoObj.desc);
+			makeToDo(toDoObj.title, toDoObj.desc, toDoObj.date, toDoObj.importance);
 		});
 	}
 }
 
 function init() {
 	newId = 0;
+	newDoneId = 0;
 	loadToDos();
-	addOpenButton.addEventListener("click", toggleAddWindow);
+	loadDoneToDos();
 }
 
 init();

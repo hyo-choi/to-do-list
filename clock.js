@@ -1,4 +1,6 @@
-const clock = document.querySelector(".js-current-time");
+/*
+	For clock in header
+*/
 
 function getTime() {
 	const date = new Date();

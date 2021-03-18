@@ -1,11 +1,17 @@
 /*
 	Each to-do item's submenu.
+	to-do done button's behavior is on "to-do-done.js".
 */
+
+let globalToDoContent = null,
+	globalTargetToDo = null;
 
 function modifyWindowExit() {
 	const toDoContent = globalToDoContent;
 	modifyToDoTitle.value = "";
 	modifyToDoDesc.value = "";
+	modifyToDoDate.value = "";
+	modifyToDoImportance.value = 3;
 	globalTargetToDo = null;
 	globalToDoContent = null;
 	modalWindowExit(modifyWindow);
@@ -15,9 +21,14 @@ function modifyWindowExit() {
 function modifyToDo() {
 	const toDoContent = globalToDoContent,
 		targetToDo = globalTargetToDo;
+
+	if (!modifyToDoTitle.value)
+		return;
 	fillToDoText(toDoContent, modifyToDoTitle.value, modifyToDoDesc.value);
 	targetToDo.title = modifyToDoTitle.value;
 	targetToDo.desc = modifyToDoDesc.value;
+	targetToDo.date = modifyToDoDate.value;
+	targetToDo.importance = modifyToDoImportance.value;
 	saveToDos();
 	modifyWindowExit();
 }
@@ -33,24 +44,40 @@ function modifyButtonClicked(button) {
 	modalWindowOpen(modifyWindow);
 	modifyToDoTitle.value = targetToDo.title;
 	modifyToDoDesc.value = targetToDo.desc;
+	modifyToDoDate.value = targetToDo.date;
+	modifyToDoImportance.value = targetToDo.importance;
+	modifyDisplayImportance.innerText = targetToDo.importance;
 	globalToDoContent = toDoContent;
 	globalTargetToDo = targetToDo;
+	modifyToDoImportance.addEventListener("input", displayImportance);
 	modCloseButton.addEventListener("click", modifyWindowExit);
 	modInModButton.addEventListener("click", modifyToDo);
 }
 
+function deleteButtonClicked(button) {
+	const toDoMenu = button.parentNode,
+		toDoItem = toDoMenu.parentNode,
+		toDoLi = toDoItem.parentNode,
+		id = parseInt(toDoLi.id);
+
+	toDoListFrame.removeChild(toDoLi);
+	const newToDos = toDoStorage.filter(function (toDo) {
+		return toDo.id !== id;
+	});
+	toDoStorage = newToDos;
+	saveToDos();
+}
+
 function innerMenuButtonClicked(event) {
 	const clickedButton = event.target,
-		clickedClass = clickedButton.className;
+		clickedClass = clickedButton.classList;
 
-	if (clickedClass === MODIFY_BUTTON)
+	if (clickedClass.contains(MODIFY_BUTTON))
 		modifyButtonClicked(clickedButton);
-	/*
-	else if (clickedClass === DONE_BUTTON)
+	else if (clickedClass.contains(DONE_BUTTON))
 		doneButtonClicked(clickedButton);
-	else if (clickedClass === DELETE_BUTTON)
+	else if (clickedClass.contains(DELETE_BUTTON))
 		deleteButtonClicked(clickedButton)
-	*/
 }
 
 function toDoMenuClicked(event) {
