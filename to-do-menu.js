@@ -1,15 +1,10 @@
 /*
 	Each to-do item's submenu.
+	to-do done button's behavior is on "to-do-done.js".
 */
 
-const modifyWindow = modalBackground.querySelector(".js-modify-window"),
-	modCloseButton = modifyWindow.querySelector(".js-modify__close-button"),
-	modInModButton = modifyWindow.querySelector(".js-modify__modify-button"),
-	modifyToDoTitle = modifyWindow.querySelector(".js-modify__title"),
-	modifyToDoDesc = modifyWindow.querySelector(".js-modify__desc"),
-	modifyToDoDate = modifyWindow.querySelector(".js-modify__date"),
-	modifyToDoImportance = modifyWindow.querySelector(".js-modify__importance"),
-	modifyDisplayImportance = modifyWindow.querySelector(".js-modify__display-importance");
+let globalToDoContent = null,
+	globalTargetToDo = null;
 
 function modifyWindowExit() {
 	const toDoContent = globalToDoContent;
@@ -75,15 +70,13 @@ function deleteButtonClicked(button) {
 
 function innerMenuButtonClicked(event) {
 	const clickedButton = event.target,
-		clickedClass = clickedButton.className;
+		clickedClass = clickedButton.classList;
 
-	if (clickedClass === MODIFY_BUTTON)
+	if (clickedClass.contains(MODIFY_BUTTON))
 		modifyButtonClicked(clickedButton);
-	/*
-	else if (clickedClass === DONE_BUTTON)
+	else if (clickedClass.contains(DONE_BUTTON))
 		doneButtonClicked(clickedButton);
-	*/
-	else if (clickedClass === DELETE_BUTTON)
+	else if (clickedClass.contains(DELETE_BUTTON))
 		deleteButtonClicked(clickedButton)
 }
 

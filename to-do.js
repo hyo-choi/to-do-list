@@ -1,29 +1,6 @@
-const content = document.querySelector("#content"),
-	menuTab = document.querySelector("#tab"),
-	toDoListFrame = content.querySelector("ul");
-
-const addWindow = modalBackground.querySelector(".js-add-window"),
-	addOpenButton = menuTab.querySelector(".js-add-tab-button"),
-	addCloseButton = addWindow.querySelector(".js-add__close-button"),
-	addInAddButton = addWindow.querySelector(".js-add__add-button"),
-	inputToDoTitle = addWindow.querySelector(".js-add__title"),
-	inputToDoDesc = addWindow.querySelector(".js-add__desc"),
-	inputToDoDate = addWindow.querySelector(".js-add__date"),
-	inputToDoImportance = addWindow.querySelector(".js-add__importance"),
-	inputDisplayImportance = addWindow.querySelector(".js-add__display-importance");
-
-const TODOS_LS = "toDoStorage",
-	MENU_CLICKED = "to-do__menu--clicked",
-	ITEM_CLICKED = "to-do-item--clicked",
-	MODIFY_BUTTON = "to-do__modify",
-	DONE_BUTTON = "to-do__done",
-	DELETE_BUTTON = "to-do__delete";
-
-let newId,
-	toDoStorage = [];
-
-let globalToDoContent = null,
-	globalTargetToDo = null;
+/*
+	When to-do add button clicked
+*/
 
 function saveToDos() {
 	localStorage.setItem(TODOS_LS, JSON.stringify(toDoStorage));
@@ -105,10 +82,13 @@ function makeToDo(Title, Desc, Date, Importance) {
 	menuButton.addEventListener("click", toDoMenuClicked);
 
 	modifyButton.className = MODIFY_BUTTON;
+	modifyButton.classList.add("to-do__modify");
 	modifyButton.innerText = "+";
 	doneButton.className = DONE_BUTTON;
+	doneButton.classList.add("to-do__done");
 	doneButton.innerText = "✓";
 	deleteButton.className = DELETE_BUTTON;
+	deleteButton.classList.add("to-do__delete");
 	deleteButton.innerText = "×";
 	toDoMenu.appendChild(modifyButton);
 	toDoMenu.appendChild(doneButton);
@@ -143,6 +123,7 @@ function handleToDoSubmit(event) {
 		importance = inputToDoImportance.value;
 	if (title) {
 		makeToDo(title, desc, date, importance);
+		showCurrentTab();
 		toggleAddWindow();
 		deleteEnteredInputs();
 	}
@@ -187,8 +168,9 @@ function loadToDos() {
 
 function init() {
 	newId = 0;
+	newDoneId = 0;
 	loadToDos();
-	addOpenButton.addEventListener("click", toggleAddWindow);
+	loadDoneToDos();
 }
 
 init();

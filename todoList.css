@@ -308,11 +308,19 @@ ul, li {
 }
 
 .to-do-item--clicked {
-	background-color: lightcoral;
+	background-color:mediumturquoise;
 }
 
 .to-do-item--clicked:hover {
-	background-color: lightcoral;
+	background-color:mediumturquoise;
+}
+
+.to-do-item--clicked.done {
+	background-color:mediumslateblue;
+}
+
+.to-do-item--clicked.done:hover {
+	background-color:mediumslateblue;
 }
 
 .to-do__content {
@@ -337,6 +345,7 @@ ul, li {
 .to-do__modify,
 .to-do__done,
 .to-do__delete,
+.to-do__restore,
 .to-do__menu {
 	z-index: 9;
 	margin: 10px;
@@ -345,19 +354,23 @@ ul, li {
 	border-radius: 20px;
 	font-size: 25px;
 }
+
 .to-do__modify,
 .to-do__done,
+.to-do__restore,
 .to-do__delete {
 	float: left;
 	background-color: white;
 }
 
-.to-do__modify {
+.to-do__modify,
+.to-do__restore {
 	margin-left: 40px;
 	color: gray;
 }
 
-.to-do__done {
+.to-do__done,
+.to-do__restore {
 	color: teal;
 }
 
@@ -369,8 +382,12 @@ ul, li {
 	opacity: 100%;
 	float: right;
 	color: white;
-	background-color:lightcoral;
+	background-color:mediumturquoise;
 	transition: all ease 1s;
+}
+
+.to-do__menu.done {
+	background-color:mediumslateblue;
 }
 
 .to-do__menu--clicked {

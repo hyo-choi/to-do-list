@@ -1,12 +1,6 @@
-const settingOpenButton = document.querySelector("#js-setting__open-button"),
-	modalBackground = document.querySelector(".js-modal-background"),
-	settingWindow = modalBackground.querySelector(".js-setting-window"),
-	settingCloseButton = settingWindow.querySelector(".js-setting__close-button"),
-	resetNameButton = settingWindow.querySelector(".js-setting__name-reset-button"),
-	resetToDoButton = settingWindow.querySelector(".js-setting__todo-reset-button"),
-	resetAllButton = settingWindow.querySelector(".js-setting__all-reset-button");
-
-const NOTSHOWING = "not-showing";
+/*
+	When setting button clicked
+*/
 
 function modalWindowOpen(window) {
 	modalBackground.classList.remove(NOTSHOWING);
@@ -16,6 +10,15 @@ function modalWindowOpen(window) {
 function modalWindowExit(window) {
 	modalBackground.classList.add(NOTSHOWING);
 	window.classList.add(NOTSHOWING);
+}
+
+function resetDoneToDos() {
+	const toDoLi = doneToDoListFrame.querySelectorAll("li");
+	toDoLi.forEach(function (toDo) {
+		toDo.remove();
+	});
+	doneToDoStorage = [];
+	saveDoneToDos();
 }
 
 function resetToDos() {
@@ -37,7 +40,9 @@ function resetSavedName() {
 
 function resetAll() {
 	resetToDos();
+	resetDoneToDos();
 	localStorage.removeItem(NAME_LS);
+	showCurrentTab();
 	loadName();
 }
 
@@ -48,8 +53,10 @@ function resetButtonCicked(event) {
 		if (!resetSavedName())
 			return;
 	}
-	else if (button.classList.contains("js-setting__todo-reset-button"))
+	else if (button.classList.contains("js-setting__todo-reset-button")) {
 		resetToDos();
+		resetDoneToDos();
+	}
 	else
 		resetAll();
 	modalWindowExit(settingWindow);
