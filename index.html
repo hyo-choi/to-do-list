@@ -7,10 +7,13 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="todoList.css">
+	<script defer src="variables.js"></script>
 	<script defer src="clock.js"></script>
 	<script defer src="setting.js"></script>
 	<script defer src="to-do-menu.js"></script>
+	<script defer src="to-do-done.js"></script>
 	<script defer src="to-do.js"></script>
+	<script defer src="tab-menu.js"></script>
 	<script defer src="header.js"></script>
 	<title>to-do list</title>
 </head>
@@ -37,11 +40,13 @@
 			</div>
 			<div id="tab">
 				<button class="add-tab-button js-add-tab-button">add</button>
-				<button class="current-tab-button">current</button>
-				<button class="done-tab-button">done</button>
+				<button class="current-tab-button js-current-tab-button">current</button>
+				<button class="done-tab-button js-done-tab-button">done</button>
 			</div>
 			<div id="content">
-				<ul>
+				<ul id="js-to-do-current">
+				</ul>
+				<ul id="js-to-do-done" class="not-showing">
 				</ul>
 				<div class="padding"></div>
 			</div>

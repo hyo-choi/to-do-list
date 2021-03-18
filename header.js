@@ -1,10 +1,6 @@
-const header = document.querySelector(".js-header"),
-	greeting = header.querySelector(".js-greeting"),
-	greetingForm = header.querySelector(".js-greeting-form"),
-	greetingInput = greetingForm.querySelector("input");
-
-const NAME_LS = "username",
-	INACTIVE = "inactive";
+/*
+	For header menu
+*/
 
 function handleNameSubmit(event) {
 	event.preventDefault();
