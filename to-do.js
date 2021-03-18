@@ -150,13 +150,19 @@ function loadToDos() {
 		if (parsedToDos === null)
 			return;
 		parsedToDos.sort(function (toDo1, toDo2) {
+			if (toDo1.date == toDo2.date) {
+				if (toDo1.importance < toDo2.importance)
+					return 1;
+				if (toDo1.importance > toDo2.importance)
+					return -1;
+			}
+			if (toDo1.date == "")
+				return 1;
+			if (toDo2.date == "")
+				return -1;
 			if (toDo1.date > toDo2.date)
 				return 1;
 			if (toDo1.date < toDo2.date)
-				return -1;
-			if (toDo1.importance < toDo2.importance)
-				return 1;
-			if (toDo1.importance > toDo2.importance)
 				return -1;
 			return 0;
 		});
