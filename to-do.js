@@ -168,6 +168,17 @@ function loadToDos() {
 		const parsedToDos = JSON.parse(loadedToDos);
 		if (parsedToDos === null)
 			return;
+		parsedToDos.sort(function (toDo1, toDo2) {
+			if (toDo1.date > toDo2.date)
+				return 1;
+			if (toDo1.date < toDo2.date)
+				return -1;
+			if (toDo1.importance < toDo2.importance)
+				return 1;
+			if (toDo1.importance > toDo2.importance)
+				return -1;
+			return 0;
+		});
 		parsedToDos.forEach(function (toDoObj) {
 			makeToDo(toDoObj.title, toDoObj.desc, toDoObj.date, toDoObj.importance);
 		});
