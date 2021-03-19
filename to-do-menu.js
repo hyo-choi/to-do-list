@@ -80,6 +80,25 @@ function innerMenuButtonClicked(event) {
 		deleteButtonClicked(clickedButton)
 }
 
+function toggleToDoMenu(menuButton) {
+	const toDoItem = menuButton.parentNode,
+		toDoContent = toDoItem.querySelector(".to-do__content"),
+		toDoMenu = toDoItem.querySelector(".to-do__menu-div");
+
+	if (menuButton.classList.contains(MENU_CLICKED)) {
+		menuButton.classList.remove(MENU_CLICKED);
+		toDoItem.classList.remove(ITEM_CLICKED);
+		toDoMenu.classList.add(NOTSHOWING);
+		toDoContent.classList.remove(NOTSHOWING);
+	}
+	else {
+		menuButton.classList.add(MENU_CLICKED);
+		toDoItem.classList.add(ITEM_CLICKED);
+		toDoMenu.classList.remove(NOTSHOWING);
+		toDoContent.classList.add(NOTSHOWING);
+	}
+}
+
 function toDoMenuClicked(event) {
 	const menuButton = event.target;
 
