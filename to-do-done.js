@@ -30,7 +30,6 @@ function doneRestoreButtonClicked(button) {
 	const targetToDo = doneToDoStorage.find(element => element.id === id);
 	makeToDo(targetToDo.title, targetToDo.desc, targetToDo.date, targetToDo.importance);
 	doneDeleteButtonClicked(button);
-	showCurrentTab();
 }
 
 function doneInnerMenuButtonClicked(event) {

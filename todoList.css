@@ -281,7 +281,8 @@ ul, li {
 
 #content {
 	margin: 0;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: auto;
 	width: inherit;
 	height: 300px;
 	text-align: center;
